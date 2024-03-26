@@ -1,0 +1,79 @@
+syntax = "proto3";
+option go_package = "./order";
+package order;
+
+message OrderInfo {
+  int64  ID             = 1;
+  int64  UserID        = 10;
+  int64  ProductID     = 20;
+  int64  AddressID     = 30;
+  string OrderNO       = 40;
+  string Title         = 50;
+  string TotalAmount   = 60;
+  string PaidAmount    = 70;
+  int64  Status        = 80;
+  string PaymentMethod = 90;
+  string OrderNotes   = 100;
+  string PaymentTime  = 110;
+}
+
+message OrderProductInfo {
+  int64  ID               = 1;
+  int64  OrderID         = 10;
+  int64  ValueOneID      = 20;
+  int64  ValueTwoID      = 30;
+  int64  ValueThreeID    = 40;
+  string ProductPrice    = 50;
+  int64  ProductQuantity = 60;
+}
+
+service Order {
+  rpc CreateOrder(CreateOrderReq)                     returns (CreateOrderResp);
+  rpc CreateOrderProduct(CreateOrderProductReq)       returns (CreateOrderProductResp);
+  rpc UpdateOrder(UpdateOrderReq)                     returns (UpdateOrderResp);
+  rpc UpdateOrderByOrderNO(UpdateOrderByOrderNOReq)   returns (UpdateOrderByOrderNOResp);
+  rpc GetOrder(GetOrderReq)                           returns (GetOrderResp);
+  rpc GetOrders(GetOrdersReq)                         returns (GetOrdersResp);
+}
+
+message CreateOrderReq{
+  OrderInfo Data = 10;
+}
+message CreateOrderResp{
+  int64 ID = 10;
+}
+
+message CreateOrderProductReq{
+  repeated OrderProductInfo Data = 10;
+}
+message CreateOrderProductResp{
+  repeated OrderProductInfo Data = 10;
+}
+
+message UpdateOrderReq{
+  OrderInfo Data = 10;
+}
+message UpdateOrderResp{
+  OrderInfo Data = 10;
+}
+
+message UpdateOrderByOrderNOReq{
+  OrderInfo Data = 10;
+}
+message UpdateOrderByOrderNOResp{
+  OrderInfo Data = 10;
+}
+
+message GetOrderReq{
+  map<string,string> Where = 10;
+}
+message GetOrderResp{
+  OrderInfo Data = 10;
+}
+
+message GetOrdersReq{
+  map<string,string> Where = 10;
+}
+message GetOrdersResp{
+  repeated OrderInfo Data = 10;
+}
