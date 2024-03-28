@@ -1,4 +1,4 @@
-module order
+module github.com/dinzhen12306/order
 
 go 1.21.3
 
